@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nadaraj — App Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#ECEEE9;
+    --ink:#13191C;
+    --ink-soft:#4B5A5E;
+    --line:#C9CDC5;
+    --teal:#1F6F6B;
+    --copper:#C9743F;
+    --paper-raised:#E2E5DE;
+  }
+
+  *{ box-sizing:border-box; }
+
+  html{ scroll-behavior:smooth; }
+
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Sans', sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  a{ color:inherit; }
+
+  .wrap{
+    max-width:920px;
+    margin:0 auto;
+    padding:0 32px;
+  }
+
+  /* ---------- Nav ---------- */
+  header{
+    padding:28px 0;
+    border-bottom:1px solid var(--line);
+  }
+  nav.wrap{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+  }
+  .logo{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:600;
+    font-size:1.05rem;
+    letter-spacing:0.02em;
+  }
+  .navlinks{
+    display:flex;
+    gap:28px;
+    font-size:0.92rem;
+  }
+  .navlinks a{
+    text-decoration:none;
+    color:var(--ink-soft);
+    border-bottom:1px solid transparent;
+    padding-bottom:2px;
+    transition:color .15s ease, border-color .15s ease;
+  }
+  .navlinks a:hover, .navlinks a:focus-visible{
+    color:var(--teal);
+    border-color:var(--teal);
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    padding:96px 0 88px;
+    display:grid;
+    grid-template-columns:1.3fr 1fr;
+    gap:40px;
+    align-items:center;
+  }
+  .hero h1{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:clamp(2.6rem, 6vw, 4.2rem);
+    line-height:1.04;
+    margin:0 0 20px;
+    letter-spacing:-0.01em;
+  }
+  .hero .role{
+    font-family:'IBM Plex Mono', monospace;
+    color:var(--teal);
+    font-size:0.98rem;
+    margin:0 0 22px;
+  }
+  .hero p{
+    max-width:52ch;
+    color:var(--ink-soft);
+    font-size:1.05rem;
+  }
+  .hero-cta{
+    margin-top:28px;
+    display:flex;
+    gap:16px;
+  }
+  .btn{
+    display:inline-block;
+    padding:12px 22px;
+    border-radius:3px;
+    font-size:0.95rem;
+    font-weight:500;
+    text-decoration:none;
+    transition:transform .15s ease, background .15s ease;
+  }
+  .btn-primary{
+    background:var(--ink);
+    color:var(--paper);
+  }
+  .btn-primary:hover{ background:var(--teal); }
+  .btn-ghost{
+    border:1px solid var(--line);
+    color:var(--ink);
+  }
+  .btn-ghost:hover{ border-color:var(--ink); }
+
+  /* decorative node diagram */
+  .diagram{
+    width:100%;
+    height:auto;
+  }
+
+  /* ---------- Section shell ---------- */
+  section{
+    padding:72px 0;
+    border-top:1px solid var(--line);
+  }
+  .label{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.85rem;
+    color:var(--copper);
+    margin:0 0 14px;
+  }
+  h2{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:1.9rem;
+    margin:0 0 28px;
+    letter-spacing:-0.01em;
+  }
+
+  /* ---------- About ---------- */
+  .about-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:48px;
+  }
+  .about-grid p{
+    color:var(--ink-soft);
+    font-size:1.02rem;
+    max-width:56ch;
+  }
+  .facts{
+    list-style:none;
+    margin:0;
+    padding:0;
+    font-size:0.95rem;
+  }
+  .facts li{
+    display:flex;
+    justify-content:space-between;
+    padding:10px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .facts li span:first-child{ color:var(--ink-soft); }
+  .facts li span:last-child{ font-weight:500; }
+
+  /* ---------- Skills ---------- */
+  .skill-block{
+    padding:22px 0;
+    border-bottom:1px solid var(--line);
+    display:grid;
+    grid-template-columns:180px 1fr;
+    gap:24px;
+    align-items:baseline;
+  }
+  .skill-block:last-child{ border-bottom:none; }
+  .skill-name{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:600;
+    font-size:1.08rem;
+  }
+  .skill-detail{
+    color:var(--ink-soft);
+    font-size:0.96rem;
+  }
+  .skill-detail code{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.86rem;
+    background:var(--paper-raised);
+    padding:2px 7px;
+    border-radius:3px;
+    margin-right:6px;
+    display:inline-block;
+    margin-bottom:6px;
+    color:var(--ink);
+  }
+
+  /* ---------- Projects ---------- */
+  .project{
+    padding:30px 0;
+    border-bottom:1px solid var(--line);
+    display:grid;
+    grid-template-columns:1fr 1.6fr;
+    gap:28px;
+  }
+  .project:last-child{ border-bottom:none; }
+  .project-title{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:1.25rem;
+    margin:0 0 6px;
+  }
+  .project-tag{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.8rem;
+    color:var(--teal);
+  }
+  .project-desc{
+    color:var(--ink-soft);
+    font-size:0.98rem;
+    margin:12px 0 14px;
+  }
+  .project-link{
+    font-size:0.92rem;
+    text-decoration:none;
+    color:var(--ink);
+    border-bottom:1px solid var(--ink);
+    padding-bottom:1px;
+  }
+  .project-link:hover{ color:var(--teal); border-color:var(--teal); }
+
+  /* ---------- Contact ---------- */
+  .contact-list{
+    list-style:none;
+    margin:0;
+    padding:0;
+    display:grid;
+    gap:14px;
+    font-size:1.05rem;
+  }
+  .contact-list a{
+    text-decoration:none;
+    display:inline-flex;
+    gap:10px;
+    align-items:center;
+  }
+  .contact-list a:hover{ color:var(--teal); }
+  .contact-list .k{
+    color:var(--ink-soft);
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.85rem;
+    width:90px;
+    display:inline-block;
+  }
+
+  footer{
+    padding:32px 0 48px;
+    color:var(--ink-soft);
+    font-size:0.85rem;
+    border-top:1px solid var(--line);
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+  }
+
+  @media (max-width: 760px){
+    .hero{ grid-template-columns:1fr; padding:56px 0 56px; }
+    .about-grid{ grid-template-columns:1fr; gap:28px; }
+    .skill-block{ grid-template-columns:1fr; gap:8px; }
+    .project{ grid-template-columns:1fr; gap:10px; }
+    .navlinks{ gap:16px; font-size:0.85rem; }
+    .contact-list .k{ width:auto; margin-right:8px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <div class="logo">NADARAJ</div>
+    <div class="navlinks">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+</header>
+
+<div class="wrap hero">
+  <div>
+    <p class="role">app developer</p>
+    <h1>I build software that learns, and secures itself while doing it.</h1>
+    <p>
+      Nadaraj — developer working across applied machine learning and applied security.
+      I like problems where the two overlap: models that need protecting, and systems
+      that need to reason.
+    </p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="#projects">See the work</a>
+      <a class="btn btn-ghost" href="#contact">Get in touch</a>
+    </div>
+  </div>
+  <div>
+    <svg class="diagram" viewBox="0 0 300 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Network diagram illustrating connected nodes">
+      <line x1="60" y1="50" x2="160" y2="30" stroke="#C9CDC5" stroke-width="1.5"/>
+      <line x1="160" y1="30" x2="250" y2="80" stroke="#C9CDC5" stroke-width="1.5"/>
+      <line x1="60" y1="50" x2="90" y2="150" stroke="#C9CDC5" stroke-width="1.5"/>
+      <line x1="90" y1="150" x2="200" y2="190" stroke="#C9CDC5" stroke-width="1.5"/>
+      <line x1="160" y1="30" x2="90" y2="150" stroke="#C9CDC5" stroke-width="1.5"/>
+      <line x1="250" y1="80" x2="200" y2="190" stroke="#C9CDC5" stroke-width="1.5"/>
+      <line x1="90" y1="150" x2="60" y2="230" stroke="#C9CDC5" stroke-width="1.5"/>
+      <line x1="200" y1="190" x2="230" y2="230" stroke="#C9CDC5" stroke-width="1.5"/>
+
+      <circle cx="60" cy="50" r="7" fill="#ECEEE9" stroke="#1F6F6B" stroke-width="2.5"/>
+      <circle cx="160" cy="30" r="6" fill="#ECEEE9" stroke="#13191C" stroke-width="2"/>
+      <circle cx="250" cy="80" r="6" fill="#ECEEE9" stroke="#13191C" stroke-width="2"/>
+      <circle cx="90" cy="150" r="9" fill="#1F6F6B" stroke="#1F6F6B" stroke-width="2"/>
+      <circle cx="200" cy="190" r="6" fill="#ECEEE9" stroke="#13191C" stroke-width="2"/>
+      <circle cx="60" cy="230" r="6" fill="#ECEEE9" stroke="#C9743F" stroke-width="2.5"/>
+      <circle cx="230" cy="230" r="6" fill="#ECEEE9" stroke="#13191C" stroke-width="2"/>
+    </svg>
+  </div>
+</div>
+
+<section id="about">
+  <div class="wrap">
+    <p class="label">about</p>
+    <h2>A little more about me</h2>
+    <div class="about-grid">
+      <p>
+        <!-- Edit this bio -->
+        I'm an app developer who moved into machine learning through wanting to build
+        software that could make its own decisions well, and into cybersecurity through
+        wanting that same software to hold up under pressure. Most of what I build sits
+        at that intersection — trained models wrapped in applications that are designed
+        to be attacked, and hardened accordingly.
+      </p>
+      <ul class="facts">
+        <li><span>Based in</span><span>Puducherry, India</span></li>
+        <li><span>Focus</span><span>ML-powered applications</span></li>
+        <li><span>Also into</span><span>Security engineering</span></li>
+        <li><span>Open to</span><span>Freelance &amp; full-time roles</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <p class="label">skills</p>
+    <h2>What I work with</h2>
+
+    <div class="skill-block">
+      <div class="skill-name">Python</div>
+      <div class="skill-detail">
+        <code>Flask</code><code>Django</code><code>FastAPI</code><code>PyTorch</code>
+        Primary language for both application backends and model code.
+      </div>
+    </div>
+
+    <div class="skill-block">
+      <div class="skill-name">Deep Learning</div>
+      <div class="skill-detail">
+        <code>TensorFlow</code><code>PyTorch</code><code>Computer Vision</code><code>NLP</code>
+        Designing, training and deploying models into production applications.
+      </div>
+    </div>
+
+    <div class="skill-block">
+      <div class="skill-name">Cybersecurity</div>
+      <div class="skill-detail">
+        <code>Network Security</code><code>Penetration Testing</code><code>Cryptography</code>
+        Hardening applications and infrastructure against real-world threats.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <p class="label">projects</p>
+    <h2>Selected work</h2>
+
+    <div class="project">
+      <div>
+        <h3 class="project-title">Intrusion Detection System</h3>
+        <p class="project-tag">Deep Learning · Cybersecurity</p>
+      </div>
+      <div>
+        <p class="project-desc">
+          <!-- Edit this project description -->
+          A neural network that flags anomalous network traffic in real time, trained
+          on flow-level data and tuned to keep false positives low enough for daily use.
+        </p>
+        <a class="project-link" href="#">View project →</a>
+      </div>
+    </div>
+
+    <div class="project">
+      <div>
+        <h3 class="project-title">Secure Mobile Banking App</h3>
+        <p class="project-tag">Python · App Development</p>
+      </div>
+      <div>
+        <p class="project-desc">
+          A banking application built with encrypted local storage, biometric auth,
+          and a backend hardened against the OWASP mobile top ten.
+        </p>
+        <a class="project-link" href="#">View project →</a>
+      </div>
+    </div>
+
+    <div class="project">
+      <div>
+        <h3 class="project-title">Malware Classifier</h3>
+        <p class="project-tag">Deep Learning · Cybersecurity</p>
+      </div>
+      <div>
+        <p class="project-desc">
+          A CNN-based classifier that identifies malware families from binary file
+          structure, packaged as a lightweight scanning tool.
+        </p>
+        <a class="project-link" href="#">View project →</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <p class="label">contact</p>
+    <h2>Let's talk</h2>
+    <ul class="contact-list">
+      <li><a href="mailto:your.email@example.com"><span class="k">email</span> your.email@example.com</a></li>
+      <li><a href="https://github.com/yourusername" target="_blank" rel="noopener"><span class="k">github</span> github.com/yourusername</a></li>
+      <li><a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener"><span class="k">linkedin</span> linkedin.com/in/yourusername</a></li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    © 2026 Nadaraj. Built with care.
+  </div>
+</footer>
+
+</body>
+</html>
